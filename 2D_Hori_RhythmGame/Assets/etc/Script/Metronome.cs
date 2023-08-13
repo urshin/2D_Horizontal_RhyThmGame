@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Metronome : MonoBehaviour
 {
+    private static Metronome Instance;
+
     AudioSource playTik;
     public AudioClip Tik;
 
@@ -13,9 +15,15 @@ public class Metronome : MonoBehaviour
     [SerializeField] float musicTempo;
     [SerializeField] float stdTempo;
 
-    float tikTime = 0;
+    public static float tikTime = 0;
     float nextTime = 0;
-
+    public void Awake()
+    {
+        if (Instance == null) //정적으로 자신을 체크함, null인진
+        {
+            Instance = this; //이후 자기 자신을 저장함.
+        }
+    }
     private void Start()
     {
         playTik= GetComponent<AudioSource>(); //오디오 소스 가져오기

@@ -20,30 +20,31 @@ public class SpawnManager : MonoBehaviour
 
     private void Start()
     {
-        //StartCoroutine(SpawnEnemy1());
+        StartCoroutine(SpawnEnemy1());
     }
 
     private void Update()
     {
 
-        currentTime += Time.deltaTime;
-        if(currentTime >= 60f/BPM)
-        {
-            GameObject t_note = Instantiate(Enemy1, tfNoteAppcar.position, Quaternion.identity);
-            t_note.transform.SetParent(this.transform);
-            currentTime -= 60f / BPM;
-        }
-
-
+        //currentTime += Time.deltaTime;
+        //if(currentTime >= 60f/BPM)
+        //{
+        //    GameObject t_note = Instantiate(Enemy1, tfNoteAppcar.position, Quaternion.identity);
+        //    t_note.transform.SetParent(this.transform);
+        //    currentTime -= 60f / BPM;
+        //}
+        
+        
     }
 
-    //IEnumerator SpawnEnemy1()
-    //{
-    //    while (true) // 公茄 风橇
-    //    {
-    //        Debug.Log("enemy");
-    //        Instantiate(Enemy1,transform.position+ new Vector3(0,0,10),Quaternion.identity);
-    //        yield return new WaitForSecondsRealtime(spawnInterval);
-    //    }
-    //}
+    IEnumerator SpawnEnemy1()
+    {
+        while (true) // 公茄 风橇
+        {
+            Debug.Log("enemy");
+            GameObject t_note = Instantiate(Enemy1, tfNoteAppcar.position, Quaternion.identity);
+                t_note.transform.SetParent(this.transform);
+            yield return new WaitForSecondsRealtime(Metronome.tikTime);
+        }
+    }
 }

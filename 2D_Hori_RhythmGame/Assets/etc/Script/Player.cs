@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.J))
         {
-            attackTime = attackDuration;
+            //attackTime = attackDuration;
             anime.SetTrigger("AttackTrigger");
         }
         

@@ -2,22 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NoteSpawner : NumPadTest
+public class NoteSpawner : MonoBehaviour
 {
+    public List<Animator> anime = new List<Animator>();
 
     int RandomNote;
     [SerializeField] int value;
+    
+    
 
     void Start()
     {
+        anime.Add(transform.Find("Note_1").gameObject.GetComponent<Animator>());
+        anime.Add(transform.Find("Note_2").gameObject.GetComponent<Animator>());
+        anime.Add(transform.Find("Note_3").gameObject.GetComponent<Animator>());
+        anime.Add(transform.Find("Note_4").gameObject.GetComponent<Animator>());
+        anime.Add(transform.Find("Note_5").gameObject.GetComponent<Animator>());
+        anime.Add(transform.Find("Note_6").gameObject.GetComponent<Animator>());
+        anime.Add(transform.Find("Note_7").gameObject.GetComponent<Animator>());
+        anime.Add(transform.Find("Note_8").gameObject.GetComponent<Animator>());
+        anime.Add(transform.Find("Note_9").gameObject.GetComponent<Animator>());
+
         StartCoroutine(Count321(3));
+       
+
         
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     IEnumerator Count321(int value)
@@ -27,49 +42,19 @@ public class NoteSpawner : NumPadTest
             Debug.Log(i);
             yield return new WaitForSeconds(1);
         }
-        StartCoroutine(CreateNote());
 
+        StartCoroutine(SpawnNote());
     }
 
-    IEnumerator CreateNote()
+    IEnumerator SpawnNote()   
     {
-        while (true)
+        while(true)
         {
+            int rannum = Random.Range(0, 9);
+            anime[rannum].SetTrigger("Pop");
             
-           RandomNote = Random.Range(1, 10);
-            switch(RandomNote)
-            {
-                case 1:
-                    anime1.SetTrigger("Pop");
-                    break;
-                case 2:
-                    anime2.SetTrigger("Pop");
-                    break;
-                case 3:
-                    anime3.SetTrigger("Pop");
-                    break;
-                case 4:
-                    anime4.SetTrigger("Pop");
-                    break;
-                case 5:
-                    anime5.SetTrigger("Pop");
-                    break;
-                case 6:
-                    anime6.SetTrigger("Pop");
-                    break;
-                case 7:
-                    anime7.SetTrigger("Pop");
-                    break;
-                case 8:
-                    anime8.SetTrigger("Pop");
-                    break;
-                case 9:
-                    anime9.SetTrigger("Pop");
-                    break;
-
-            }
-            yield return new WaitForSecondsRealtime(0.5f);
-
+            yield return new WaitForSeconds(Metronome.tikTime);
         }
     }
+
 }
